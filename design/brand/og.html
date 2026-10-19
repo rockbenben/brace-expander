@@ -1,0 +1,126 @@
+<!doctype html>
+<!--
+  社交预览图 1280×640。
+
+  渲染（改设计后重跑）：
+    node {html-shot}/render.mjs design/brand/og.html public/og-image.png --palette
+
+  尺寸用 1280×640 而不是常见的 1200×630：这张图上传到 GitHub 的
+  **Settings → Social preview**，GitHub 对社交预览的推荐尺寸就是 1280×640；
+  `src/app/lib/seo.ts` 里 og:image 的 width/height 也按这个值声明，两边必须与
+  实际文件一致，抓取端才不会按错的比例裁图。
+
+  ⚠ **字体是 @import 拉的网络字体，离线重渲会静默换脸。** 换成系统字体后整张卡
+  仍是合法 PNG、体积正常、渲染脚本零报错，只有肉眼看得出 —— 所以每次重渲后都要
+  把图读回来确认一次标题字形没变。若要字节可复现，把 woff2 放进 public/fonts/
+  改用 @font-face 自托管。
+
+  构图是四选一比对出来的，三张落选方案留在 design/brand/og-sheet.html，
+  下次改版可以在同一张样张里继续比：
+    node render.mjs design/brand/og-sheet.html out.png --selector "#v4"
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Brace Expander — social card</title>
+<style>
+  /* 社交预览图在信息流里按缩略图尺寸展示（通常约 400px 宽，比例只剩 0.31），
+     读者只看得清大色块和大字。所以排版优先级是：
+       ① `{1..100}` —— 一眼说明这是个花括号展开工具，也是全卡最大的字
+       ② "expands to 100 field names" —— 说清得到什么
+       ③ 那条字段名样例 —— 只作佐证，缩略图里读不了，作用是全尺寸下让人信
+     实测过四版：把字段名竖排成五行的版本在缩略图里会退化成噪点、还跟标题抢注意力，
+     所以这里只留一条横带。 */
+
+  @import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root{
+    --bg:#15171C; --line:#2A2F38; --ink:#ECEAE3; --muted:#868D97;
+    --gold:#F4B740; --a:#6366F1; --b:#22D3EE;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  /* position:relative —— 页脚的绝对定位锚到卡片而不是视口，
+     卡片一旦比视口矮，页脚就会飘出去 */
+  html,body{width:1280px;height:640px}
+  body{
+    background:var(--bg); color:var(--ink);
+    position:relative; overflow:hidden;
+    font-family:'Schibsted Grotesk','Segoe UI',system-ui,sans-serif;
+    display:flex; flex-direction:column; padding:40px 60px 38px;
+  }
+  /* 极淡的网格底纹，只给纯色底一点结构，不参与信息 */
+  body::before{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px; opacity:.15;
+  }
+  .row{position:relative; display:flex; align-items:center; gap:14px}
+  .mark{width:50px;height:50px;flex:0 0 auto}
+  .wordmark{font-size:33px;font-weight:800;letter-spacing:-.4px}
+  .tag{
+    margin-left:auto; font-size:17px; font-weight:700; color:var(--gold);
+    border:1.5px solid var(--gold); border-radius:999px; padding:6px 16px;
+  }
+
+  .hero{
+    position:relative; flex:1;
+    display:flex; flex-direction:column; justify-content:center; gap:30px;
+  }
+  /* 花括号金色、数字灰 —— 括号是"机制"，数字是"输入"，主次一眼分开 */
+  .syntax{font-size:158px; font-weight:700; line-height:1; letter-spacing:-7px; color:var(--gold)}
+  .syntax i{font-style:normal; color:#79808C}
+
+  .claim{font-size:44px; font-weight:800; letter-spacing:-1.4px}
+  .claim span{color:var(--gold)}
+
+  /* 模板与结果都用等宽 —— 这两处正是产品的"输入语法"和"产物"，
+     等宽让 {1..4} 和它展开出的数字在字形上直接对得上。
+     靛蓝 = {1..4} 槽，青 = {tag,bal} 槽，与 public/icon.png 同一套图例。 */
+  .mono{font-family:'JetBrains Mono',Consolas,monospace; font-weight:500}
+  .strip{font-size:26px; white-space:nowrap}
+  .va{color:var(--a);font-weight:700}
+  .vb{color:var(--b);font-weight:700}
+  .more{color:#4A505C}
+
+  /* 页脚是零承诺信号：bash 语法、跑在浏览器里、不上传 */
+  .foot{position:relative; display:flex; align-items:center; gap:13px; font-size:21px; color:var(--muted)}
+  .foot b{color:var(--ink); font-weight:700}
+  .dot{width:5px;height:5px;border-radius:50%;background:var(--line);flex:0 0 auto}
+</style>
+</head>
+<body>
+  <div class="row">
+    <!-- 与 public/icon.png 同一枚标记（一对金括号 + 靛青两列展开结果），
+         缩到 50px 后不画行内宽度差异，只保留能认出的轮廓 -->
+    <svg class="mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <rect width="64" height="64" rx="14" fill="#1F232B"/>
+      <g stroke="#F4B740" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M 24,10 C 18,10 16,13 16,17 L 16,28 C 16,31 13,32 10,32 C 13,32 16,33 16,36 L 16,47 C 16,51 18,54 24,54"/>
+        <path d="M 40,10 C 46,10 48,13 48,17 L 48,28 C 48,31 51,32 54,32 C 51,32 48,33 48,36 L 48,47 C 48,51 46,54 40,54"/>
+      </g>
+      <rect x="22" y="18" width="11" height="7" rx="3" fill="#6366F1"/>
+      <rect x="35" y="18" width="7"  height="7" rx="3" fill="#22D3EE"/>
+      <rect x="22" y="29" width="9"  height="7" rx="3" fill="#6366F1"/>
+      <rect x="33" y="29" width="9"  height="7" rx="3" fill="#22D3EE"/>
+      <rect x="22" y="40" width="12" height="7" rx="3" fill="#6366F1"/>
+      <rect x="36" y="40" width="6"  height="7" rx="3" fill="#22D3EE"/>
+    </svg>
+    <div class="wordmark">Brace Expander</div>
+    <div class="tag">365 #043</div>
+  </div>
+
+  <div class="hero">
+    <div class="syntax mono">{<i>1</i>..<i>100</i>}</div>
+    <div class="claim">expands to <span>100 field names</span></div>
+    <div class="strip mono">f<span class="va">1</span>pd_<span class="vb">tag</span>   f<span class="va">1</span>pd_<span class="vb">bal</span>   f<span class="va">2</span>pd_<span class="vb">tag</span>   f<span class="va">2</span>pd_<span class="vb">bal</span>   <span class="more">f3pd_tag …</span></div>
+  </div>
+
+  <div class="foot">
+    <b>bash brace expansion</b><span class="dot"></span>
+    <b>in your browser</b><span class="dot"></span>
+    nothing uploaded
+  </div>
+</body>
+</html>

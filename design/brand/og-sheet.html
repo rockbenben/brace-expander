@@ -1,0 +1,206 @@
+<!doctype html>
+<!--
+  html-shot 品牌样张：三张 1280×640 的社交卡构图对照。
+
+  同一套配色、同一枚标记，**只改构图** —— 这样对比出来的差异才是构图本身的差异，
+  而不是配色/字体的差异。按 skill 的用法，逐个 shoot：
+
+    node render.mjs og-sheet.html v1.png --selector "#v1"
+    node render.mjs og-sheet.html v2.png --selector "#v2"
+    node render.mjs og-sheet.html v3.png --selector "#v3"
+
+  三条不同的路子：
+    #v1 demo-led   主标题 + 模板/产出两栏对照（信息量最大）
+    #v2 syntax-led 把 `{1..100}` 这个语法本身当主角（最有辨识度）
+    #v3 statement-led 只留一句话，产出压成一条横带（缩略图最稳）
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root{
+    --bg:#15171C; --line:#2A2F38; --ink:#ECEAE3; --muted:#868D97;
+    --gold:#F4B740; --a:#6366F1; --b:#22D3EE;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:#0B0C0F; width:1400px; padding:40px;
+    display:flex; flex-direction:column; gap:40px;
+  }
+  .card{
+    width:1280px; height:640px; position:relative; overflow:hidden;
+    background:var(--bg); color:var(--ink);
+    font-family:'Schibsted Grotesk','Segoe UI',system-ui,sans-serif;
+    display:flex; flex-direction:column;
+  }
+  /* 卡片底纹：极淡的网格，给纯色底一点结构，不参与信息 */
+  .card::before{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px; opacity:.15;
+  }
+  .row{position:relative; display:flex; align-items:center; gap:14px}
+  .mark{width:50px;height:50px;flex:0 0 auto}
+  .wordmark{font-size:33px;font-weight:800;letter-spacing:-.4px}
+  .tag{
+    margin-left:auto; font-size:17px; font-weight:700; color:var(--gold);
+    border:1.5px solid var(--gold); border-radius:999px; padding:6px 16px;
+  }
+  .mono{font-family:'JetBrains Mono',Consolas,monospace; font-weight:500}
+  .cap{font-size:15px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:12px}
+  .lit{color:var(--muted)}
+  .va{color:var(--a);font-weight:700}
+  .vb{color:var(--b);font-weight:700}
+  .more{color:#4A505C}
+  .foot{position:relative; display:flex; align-items:center; gap:13px; font-size:21px; color:var(--muted)}
+  .foot b{color:var(--ink); font-weight:700}
+  .dot{width:5px;height:5px;border-radius:50%;background:var(--line);flex:0 0 auto}
+
+  /* ── #v1 demo-led ───────────────────────────────────────── */
+  #v1{padding:40px 60px 38px}
+  #v1 .main{position:relative; display:flex; align-items:center; gap:46px; flex:1}
+  #v1 h1{font-size:66px; line-height:1.06; font-weight:800; letter-spacing:-2px; flex:0 0 auto}
+  #v1 h1 em{font-style:normal; color:var(--gold)}
+  #v1 .writeline{display:flex; align-items:center; gap:30px; margin-top:34px}
+  #v1 .arrow{font-size:40px; color:var(--muted); flex:0 0 auto; line-height:1}
+  #v1 .tplbox{
+    font-size:34px; font-weight:700; color:var(--gold);
+    background:rgba(244,183,64,.10); border:1.5px solid rgba(244,183,64,.38);
+    border-radius:16px; padding:18px 26px; white-space:nowrap;
+  }
+  #v1 .out{font-size:31px; line-height:1.56; white-space:pre}
+
+  /* ── #v2 syntax-led ──────────────────────────────────────── */
+  #v2{padding:40px 60px 38px}
+  #v2 .hero{position:relative; flex:1; display:flex; flex-direction:column; justify-content:center; gap:26px}
+  #v2 .syntax{font-size:150px; font-weight:700; line-height:1; letter-spacing:-6px; color:var(--gold)}
+  #v2 .syntax i{font-style:normal; color:var(--muted)}
+  #v2 .claim{font-size:40px; font-weight:800; letter-spacing:-1.2px}
+  #v2 .claim span{color:var(--gold)}
+  #v2 .strip{font-size:26px; white-space:nowrap; overflow:hidden}
+
+  /* ── #v4 syntax-led 改良版：v2 的骨架，文案与纵向节奏重做 ── */
+  #v4{padding:40px 60px 38px}
+  #v4 .hero{position:relative; flex:1; display:flex; flex-direction:column;
+            justify-content:center; gap:30px}
+  #v4 .syntax{font-size:158px; font-weight:700; line-height:1; letter-spacing:-7px; color:var(--gold)}
+  #v4 .syntax i{font-style:normal; color:#79808C}
+  #v4 .claim{font-size:44px; font-weight:800; letter-spacing:-1.4px}
+  #v4 .claim span{color:var(--gold)}
+  #v4 .strip{font-size:26px; white-space:nowrap}
+
+  /* ── #v3 statement-led ───────────────────────────────────── */
+  #v3{padding:40px 60px 38px; align-items:center; text-align:center}
+  #v3 .row{width:100%}
+  #v3 .mid{position:relative; flex:1; display:flex; flex-direction:column;
+           align-items:center; justify-content:center; gap:30px; width:100%}
+  #v3 h1{font-size:82px; line-height:1.05; font-weight:800; letter-spacing:-2.6px}
+  #v3 h1 em{font-style:normal; color:var(--gold)}
+  #v3 .strip{
+    font-size:25px; white-space:nowrap; color:#9AA1AC;
+    background:rgba(255,255,255,.03); border:1px solid var(--line);
+    border-radius:999px; padding:12px 30px;
+  }
+  #v3 .foot{width:100%; justify-content:center}
+</style>
+</head>
+<body>
+
+<!-- ── 标记：一对金括号 + 靛青两列展开结果（与 public/icon.png 同一枚） ── -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="mark" viewBox="0 0 64 64">
+    <rect width="64" height="64" rx="14" fill="#1F232B"/>
+    <g stroke="#F4B740" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M 24,10 C 18,10 16,13 16,17 L 16,28 C 16,31 13,32 10,32 C 13,32 16,33 16,36 L 16,47 C 16,51 18,54 24,54"/>
+      <path d="M 40,10 C 46,10 48,13 48,17 L 48,28 C 48,31 51,32 54,32 C 51,32 48,33 48,36 L 48,47 C 48,51 46,54 40,54"/>
+    </g>
+    <rect x="22" y="18" width="11" height="7" rx="3" fill="#6366F1"/>
+    <rect x="35" y="18" width="7"  height="7" rx="3" fill="#22D3EE"/>
+    <rect x="22" y="29" width="9"  height="7" rx="3" fill="#6366F1"/>
+    <rect x="33" y="29" width="9"  height="7" rx="3" fill="#22D3EE"/>
+    <rect x="22" y="40" width="12" height="7" rx="3" fill="#6366F1"/>
+    <rect x="36" y="40" width="6"  height="7" rx="3" fill="#22D3EE"/>
+  </symbol>
+</svg>
+
+<!-- ══ #v1 demo-led ══════════════════════════════════════════ -->
+<div class="card" id="v1">
+  <div class="row">
+    <svg class="mark"><use href="#mark"/></svg>
+    <div class="wordmark">Brace Expander</div>
+    <div class="tag">365 #043</div>
+  </div>
+  <div class="main">
+    <div>
+      <h1>One template in,<br><em>every field name</em> out.</h1>
+      <div class="writeline">
+        <div>
+          <div class="cap">you write</div>
+          <div class="tplbox mono">f<span class="va">{1..4}</span>pd<span class="lit">_</span><span class="vb">{tag,bal}</span></div>
+        </div>
+        <div class="arrow">→</div>
+      </div>
+    </div>
+    <div>
+      <div class="cap">you get</div>
+      <div class="out mono"><span class="lit">f</span><span class="va">1</span><span class="lit">pd_</span><span class="vb">tag</span>
+<span class="lit">f</span><span class="va">1</span><span class="lit">pd_</span><span class="vb">bal</span>
+<span class="lit">f</span><span class="va">2</span><span class="lit">pd_</span><span class="vb">tag</span>
+<span class="lit">f</span><span class="va">2</span><span class="lit">pd_</span><span class="vb">bal</span>
+<span class="lit">f</span><span class="va">3</span><span class="lit">pd_</span><span class="vb">tag</span>
+<span class="more">…</span></div>
+    </div>
+  </div>
+  <div class="foot"><b>bash brace expansion</b><span class="dot"></span><b>in your browser</b><span class="dot"></span>nothing uploaded</div>
+</div>
+
+<!-- ══ #v2 syntax-led ════════════════════════════════════════ -->
+<div class="card" id="v2">
+  <div class="row">
+    <svg class="mark"><use href="#mark"/></svg>
+    <div class="wordmark">Brace Expander</div>
+    <div class="tag">365 #043</div>
+  </div>
+  <div class="hero">
+    <div class="syntax mono">{<i>1</i>..<i>100</i>}<i> </i></div>
+    <div class="claim">becomes <span>100 field names</span>, in one line of bash</div>
+    <div class="strip mono">f<span class="va">1</span>pd_<span class="vb">tag</span>   f<span class="va">1</span>pd_<span class="vb">bal</span>   f<span class="va">2</span>pd_<span class="vb">tag</span>   f<span class="va">2</span>pd_<span class="vb">bal</span>   <span class="more">f3pd_tag …</span></div>
+  </div>
+  <div class="foot"><b>bash brace expansion</b><span class="dot"></span><b>in your browser</b><span class="dot"></span>nothing uploaded</div>
+</div>
+
+<!-- ══ #v3 statement-led ═════════════════════════════════════ -->
+<div class="card" id="v3">
+  <div class="row">
+    <svg class="mark"><use href="#mark"/></svg>
+    <div class="wordmark">Brace Expander</div>
+    <div class="tag">365 #043</div>
+  </div>
+  <div class="mid">
+    <h1>One line of bash.<br><em>Every field name</em> out.</h1>
+    <div class="strip mono">f<span class="va">{1..4}</span>pd_<span class="vb">{tag,bal}</span> &nbsp;→&nbsp; f<span class="va">1</span>pd_<span class="vb">tag</span> · f<span class="va">1</span>pd_<span class="vb">bal</span> · f<span class="va">2</span>pd_<span class="vb">tag</span> <span class="more">…</span></div>
+  </div>
+  <div class="foot"><b>bash brace expansion</b><span class="dot"></span><b>in your browser</b><span class="dot"></span>nothing uploaded</div>
+</div>
+
+<!-- ══ #v4 syntax-led 改良版 ══════════════════════════════════ -->
+<div class="card" id="v4">
+  <div class="row">
+    <svg class="mark"><use href="#mark"/></svg>
+    <div class="wordmark">Brace Expander</div>
+    <div class="tag">365 #043</div>
+  </div>
+  <div class="hero">
+    <div class="syntax mono">{<i>1</i>..<i>100</i>}</div>
+    <div class="claim">expands to <span>100 field names</span></div>
+    <div class="strip mono">f<span class="va">1</span>pd_<span class="vb">tag</span>   f<span class="va">1</span>pd_<span class="vb">bal</span>   f<span class="va">2</span>pd_<span class="vb">tag</span>   f<span class="va">2</span>pd_<span class="vb">bal</span>   <span class="more">f3pd_tag …</span></div>
+  </div>
+  <div class="foot"><b>bash brace expansion</b><span class="dot"></span><b>in your browser</b><span class="dot"></span>nothing uploaded</div>
+</div>
+
+</body>
+</html>

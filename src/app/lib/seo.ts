@@ -49,7 +49,7 @@ export function buildToolPageMetadata({ locale, title, description, path }: { lo
       description,
       url: fullUrl,
       siteName: SITE_NAME,
-      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: title }],
+      images: [{ url: OG_IMAGE, width: 1280, height: 640, alt: title }],
       locale: getOGLocale(locale),
       alternateLocale: routing.locales.filter((l) => l !== locale).map(getOGLocale),
       type: "website",

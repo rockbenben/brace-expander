@@ -43,8 +43,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     metadataBase: new URL(SITE_URL),
     title,
     description,
+    // 图标源在 design/brand/icon.svg，产物由 html-shot 生成到 public/：
+    //   icons.mjs design/brand/icon.svg public --preset next   （favicon.ico + apple-icon.png + icon.svg）
+    //   render.mjs design/brand/icon.svg public/icon.png --width 512
+    //   render.mjs design/brand/icon.svg public/logo.png --width 1024
+    // favicon.ico 在 public/ 根下会被静态服务到 /favicon.ico，无需在此声明；
+    // icon.svg 与 icon.png 需要显式列出 —— 浏览器优先取 SVG（高分屏不糊），旧浏览器回落 PNG。
     icons: {
-      icon: "/icon.png",
+      icon: [
+        { url: "/icon.svg", type: "image/svg+xml" },
+        { url: "/icon.png", sizes: "512x512" },
+      ],
       apple: "/apple-icon.png",
     },
   };
