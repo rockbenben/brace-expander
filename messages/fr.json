@@ -202,7 +202,7 @@
   "tools": {
     "subtitleTranslator": {
       "title": "Traducteur Sous-titres",
-      "description": "Traduction par lot SRT, ASS, VTT, SBV, LRC. 120+ langues."
+      "description": "Traduction par lot SRT, ASS, SSA, VTT, SBV, LRC. 120+ langues."
     },
     "jsonTranslate": {
       "title": "Traducteur JSON i18n",
@@ -266,7 +266,7 @@
     },
     "dataParserFlare": {
       "title": "Convertisseur Flare",
-      "description": "Conversion favoris navigateur et format Flare"
+      "description": "Favoris HTML vers Flare YAML (aplati)"
     },
     "dataParserImgPrompt": {
       "title": "Générateur Données IMGPrompt",
@@ -301,6 +301,10 @@
         {
           "q": "Comment contrôler l'ordre de plusieurs variables ?",
           "a": "Utilisez le sélecteur **Ordre de sortie** sous le modèle. **Entrelacé** correspond à bash (f1_tag, f1_bal, f2_tag…) ; **Groupé** laisse la variable de droite aller jusqu'au bout, donc toutes les lignes tag d'abord, puis toutes les lignes bal. Les deux modes produisent les mêmes éléments, seul l'ordre change."
+        },
+        {
+          "q": "Mon modèle est-il envoyé sur un serveur ?",
+          "a": "100% côté client : l'expansion des accolades se passe entièrement dans votre navigateur — ni le modèle ni le résultat ne sont envoyés, donc les contenus sensibles sont protégés."
         }
       ],
       "features": [

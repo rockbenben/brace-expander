@@ -202,7 +202,7 @@
   "tools": {
     "subtitleTranslator": {
       "title": "Penerjemah Subtitle",
-      "description": "Terjemahan batch SRT, ASS, VTT, SBV, LRC. 120+ bahasa."
+      "description": "Terjemahan batch SRT, ASS, SSA, VTT, SBV, LRC. 120+ bahasa."
     },
     "jsonTranslate": {
       "title": "Penerjemah JSON i18n",
@@ -266,7 +266,7 @@
     },
     "dataParserFlare": {
       "title": "Konverter Flare",
-      "description": "Konversi bookmark browser dan format Flare"
+      "description": "Bookmark HTML ke Flare YAML (rata)"
     },
     "dataParserImgPrompt": {
       "title": "Generator Data IMGPrompt",
@@ -301,6 +301,10 @@
         {
           "q": "Bagaimana mengatur urutan beberapa variabel?",
           "a": "Pakai sakelar **Urutan keluaran** di bawah templat. **Bersilangan** sama dengan bash (f1_tag, f1_bal, f2_tag…); **Dikelompokkan** membiarkan variabel paling kanan selesai dulu, jadi semua baris tag muncul sebelum semua baris bal. Kedua mode menghasilkan item yang sama; hanya urutannya berbeda."
+        },
+        {
+          "q": "Apakah templat yang diunggah disimpan di server?",
+          "a": "Pemrosesan frontend 100%: ekspansi brace dilakukan sepenuhnya di browser, templat maupun hasilnya tidak diunggah ke server mana pun, konten sensitif aman."
         }
       ],
       "features": [

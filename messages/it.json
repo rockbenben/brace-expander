@@ -202,7 +202,7 @@
   "tools": {
     "subtitleTranslator": {
       "title": "Traduttore Sottotitoli",
-      "description": "Traduzione in batch SRT, ASS, VTT, SBV, LRC. 120+ lingue."
+      "description": "Traduzione in batch SRT, ASS, SSA, VTT, SBV, LRC. 120+ lingue."
     },
     "jsonTranslate": {
       "title": "Traduttore JSON i18n",
@@ -266,7 +266,7 @@
     },
     "dataParserFlare": {
       "title": "Convertitore Flare",
-      "description": "Conversione preferiti browser e formato Flare"
+      "description": "Segnalibri HTML in Flare YAML (appiattito)"
     },
     "dataParserImgPrompt": {
       "title": "Generatore Dati IMGPrompt",
@@ -301,6 +301,10 @@
         {
           "q": "Come controllo l'ordine di più variabili?",
           "a": "Usa l'interruttore **Ordine di output** sotto il modello. **Interleaved** coincide con bash (f1_tag, f1_bal, f2_tag…); **Raggruppato** lascia finire la variabile di destra, quindi prima tutte le righe tag e poi tutte quelle bal. Entrambe le modalità producono gli stessi elementi; cambia solo l'ordine."
+        },
+        {
+          "q": "Il mio modello viene caricato su un server?",
+          "a": "100% lato client: l'espansione delle graffe avviene interamente nel tuo browser — né il modello né il risultato vengono caricati, quindi i contenuti sensibili sono al sicuro."
         }
       ],
       "features": [

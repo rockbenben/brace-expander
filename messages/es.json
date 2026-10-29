@@ -202,7 +202,7 @@
   "tools": {
     "subtitleTranslator": {
       "title": "Traductor Subtítulos",
-      "description": "Traducción por lote SRT, ASS, VTT, SBV, LRC. 120+ idiomas."
+      "description": "Traducción por lote SRT, ASS, SSA, VTT, SBV, LRC. 120+ idiomas."
     },
     "jsonTranslate": {
       "title": "Traductor JSON i18n",
@@ -266,7 +266,7 @@
     },
     "dataParserFlare": {
       "title": "Convertidor Flare",
-      "description": "Conversión marcadores navegador y formato Flare"
+      "description": "Marcadores HTML a Flare YAML (aplanado)"
     },
     "dataParserImgPrompt": {
       "title": "Generador Datos IMGPrompt",
@@ -301,6 +301,10 @@
         {
           "q": "¿Cómo controlo el orden de varias variables?",
           "a": "Usa el conmutador **Orden de salida** bajo la plantilla. **Entrelazado** coincide con bash (f1_tag, f1_bal, f2_tag…); **Agrupado** deja que la variable de la derecha termine, así que salen todas las filas de tag y después todas las de bal. Ambos modos producen los mismos elementos; solo cambia el orden."
+        },
+        {
+          "q": "¿Se sube mi plantilla a un servidor?",
+          "a": "100% del lado del cliente: la expansión de llaves ocurre totalmente en tu navegador — ni la plantilla ni el resultado se suben, así que el contenido sensible está seguro."
         }
       ],
       "features": [

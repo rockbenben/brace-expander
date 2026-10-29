@@ -202,7 +202,7 @@
   "tools": {
     "subtitleTranslator": {
       "title": "字幕翻訳機",
-      "description": "SRT、ASS、VTT、SBV、LRC字幕を一括翻訳、120以上の言語に対応"
+      "description": "SRT、ASS、SSA、VTT、SBV、LRC字幕を一括翻訳、120以上の言語に対応"
     },
     "jsonTranslate": {
       "title": "i18n JSON翻訳",
@@ -266,7 +266,7 @@
     },
     "dataParserFlare": {
       "title": "Flareブックマーク変換",
-      "description": "ブラウザブックマークとFlare形式の相互変換"
+      "description": "ブックマーク HTML を Flare YAML に変換（フラット化）"
     },
     "dataParserImgPrompt": {
       "title": "IMGPromptデータ生成",
@@ -301,6 +301,10 @@
         {
           "q": "複数の変数の順序はどう制御しますか？",
           "a": "テンプレート直下の「出力順」スイッチを使います。**交差**は bash と同じ（f1_tag、f1_bal、f2_tag…）、**グループ**は一番右の変数を最後まで出すので tag を全部出してから bal を全部出します。どちらのモードでも項目は同じで、順序だけが異なります。"
+        },
+        {
+          "q": "テンプレートはサーバーに保存されますか？",
+          "a": "完全フロントエンド処理：テンプレートのブレース展開はすべてブラウザ内で完結し、テンプレートも展開結果もいかなるサーバーにもアップロードされません。機密内容も安心してご利用いただけます。"
         }
       ],
       "features": [

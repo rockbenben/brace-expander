@@ -202,7 +202,7 @@
   "tools": {
     "subtitleTranslator": {
       "title": "Tradutor Legendas",
-      "description": "Tradução em lote SRT, ASS, VTT, SBV, LRC. 120+ idiomas."
+      "description": "Tradução em lote SRT, ASS, SSA, VTT, SBV, LRC. 120+ idiomas."
     },
     "jsonTranslate": {
       "title": "Tradutor JSON i18n",
@@ -266,7 +266,7 @@
     },
     "dataParserFlare": {
       "title": "Conversor Flare",
-      "description": "Conversão favoritos navegador e formato Flare"
+      "description": "Favoritos HTML para Flare YAML (achatado)"
     },
     "dataParserImgPrompt": {
       "title": "Gerador Dados IMGPrompt",
@@ -301,6 +301,10 @@
         {
           "q": "Como controlo a ordem de várias variáveis?",
           "a": "Use o seletor **Ordem de saída** abaixo do modelo. **Entrelaçado** corresponde ao bash (f1_tag, f1_bal, f2_tag…); **Agrupado** deixa a variável da direita terminar, então vêm todas as linhas de tag e depois todas as de bal. Os dois modos geram os mesmos itens; só a ordem muda."
+        },
+        {
+          "q": "Meu modelo é enviado para algum servidor?",
+          "a": "100% no navegador: a expansão de chaves acontece inteiramente no seu navegador — nem o modelo nem o resultado são enviados, então conteúdo sensível fica seguro."
         }
       ],
       "features": [

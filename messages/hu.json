@@ -202,7 +202,7 @@
   "tools": {
     "subtitleTranslator": {
       "title": "Feliratfordító",
-      "description": "SRT, ASS, VTT, SBV, LRC feliratok kötegelt fordítása. 120+ nyelv."
+      "description": "SRT, ASS, SSA, VTT, SBV, LRC feliratok kötegelt fordítása. 120+ nyelv."
     },
     "jsonTranslate": {
       "title": "JSON többnyelvű fordító",
@@ -266,7 +266,7 @@
     },
     "dataParserFlare": {
       "title": "Flare könyvjelző-konverter",
-      "description": "Könyvjelzők konvertálása Flare formátumba és abból vissza"
+      "description": "Könyvjelző HTML-ből Flare YAML (lapos)"
     },
     "dataParserImgPrompt": {
       "title": "IMGPrompt adatgenerátor",
@@ -301,6 +301,10 @@
         {
           "q": "Hogyan szabomozható meg több változó sorrendje?",
           "a": "A sablon alatti **Kimenet sorrend** kapcsolóval. Az **Összefonódó** megegyezik a bash-csal (f1_tag, f1_bal, f2_tag…); a **Csoportosított** végigviszi a jobb oldali változót, így előbb az összes tag sor, aztán az összes bal sor következik. Mindkét mód ugyanazokat a sorokat adja, csak a sorrend más."
+        },
+        {
+          "q": "Feltöltődik a sablonom valamilyen szerverre?",
+          "a": "100%-ban kliensoldali: a kapcsoszárójel-kibontás teljes egészében a böngésződben történik — sem a sablon, sem az eredmény nem kerül fel szerverre, így a bizalmas tartalom biztonságban van."
         }
       ],
       "features": [

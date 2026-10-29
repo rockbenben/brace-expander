@@ -202,7 +202,7 @@
   "tools": {
     "subtitleTranslator": {
       "title": "字幕翻譯器",
-      "description": "批次翻譯 SRT、ASS、VTT、SBV、LRC 字幕，支援 120+ 語言"
+      "description": "批次翻譯 SRT、ASS、SSA、VTT、SBV、LRC 字幕，支援 120+ 語言"
     },
     "jsonTranslate": {
       "title": "JSON 多語言翻譯",
@@ -266,7 +266,7 @@
     },
     "dataParserFlare": {
       "title": "Flare 書籤轉換",
-      "description": "瀏覽器書籤與 Flare 格式互轉"
+      "description": "瀏覽器書籤轉 Flare YAML（扁平化匯入）"
     },
     "dataParserImgPrompt": {
       "title": "IMGPrompt 資料產生",
@@ -301,6 +301,10 @@
         {
           "q": "怎麼控制多個變數的先後順序？",
           "a": "模板正下方有「輸出順序」開關。**交叉**與 bash 一致（f1_tag、f1_bal、f2_tag…）；**分組**讓最右邊的變數整個跑完，先列完全部 tag、再列完全部 bal。兩種模式的條目完全相同，只換排列。"
+        },
+        {
+          "q": "範本會儲存到伺服器嗎？",
+          "a": "完全前端處理：範本的大括號展開全部在瀏覽器內完成，範本與展開結果都不上傳任何伺服器，敏感內容也可放心使用。"
         }
       ],
       "features": [

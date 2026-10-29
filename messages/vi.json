@@ -202,7 +202,7 @@
   "tools": {
     "subtitleTranslator": {
       "title": "Trình Dịch Phụ Đề",
-      "description": "Dịch hàng loạt SRT, ASS, VTT, SBV, LRC. 120+ ngôn ngữ."
+      "description": "Dịch hàng loạt SRT, ASS, SSA, VTT, SBV, LRC. 120+ ngôn ngữ."
     },
     "jsonTranslate": {
       "title": "Trình Dịch JSON i18n",
@@ -266,7 +266,7 @@
     },
     "dataParserFlare": {
       "title": "Trình chuyển đổi Flare",
-      "description": "Chuyển đổi bookmark trình duyệt và định dạng Flare"
+      "description": "Bookmark HTML sang Flare YAML (làm phẳng)"
     },
     "dataParserImgPrompt": {
       "title": "Trình tạo dữ liệu IMGPrompt",
@@ -301,6 +301,10 @@
         {
           "q": "Làm sao kiểm soát thứ tự của nhiều biến?",
           "a": "Dùng công tắc **Thứ tự đầu ra** bên dưới mẫu. **So lep** giống bash (f1_tag, f1_bal, f2_tag…); **Nhóm** cho biến ngoài cùng bên phải chạy hết, nên mọi dòng tag đến trước rồi mới tới mọi dòng bal. Cả hai chế độ cho ra cùng các mục, chỉ khác thứ tự."
+        },
+        {
+          "q": "Văn bản mẫu của tôi có được tải lên máy chủ không?",
+          "a": "100% phía client: việc mở rộng ngoặc nhọn diễn ra hoàn toàn trong trình duyệt — cả mẫu lẫn kết quả đều không được tải lên máy chủ, nội dung nhạy cảm vẫn an toàn."
         }
       ],
       "features": [

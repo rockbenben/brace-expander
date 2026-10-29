@@ -202,7 +202,7 @@
   "tools": {
     "subtitleTranslator": {
       "title": "Untertitel-Übersetzer",
-      "description": "Batch-Übersetzung für SRT, ASS, VTT, SBV, LRC. 120+ Sprachen."
+      "description": "Batch-Übersetzung für SRT, ASS, SSA, VTT, SBV, LRC. 120+ Sprachen."
     },
     "jsonTranslate": {
       "title": "i18n JSON-Übersetzer",
@@ -266,7 +266,7 @@
     },
     "dataParserFlare": {
       "title": "Flare Lesezeichen-Konverter",
-      "description": "Browser-Lesezeichen und Flare-Format konvertieren"
+      "description": "Lesezeichen-HTML zu Flare-YAML (flachgestellt)"
     },
     "dataParserImgPrompt": {
       "title": "IMGPrompt Datengenerator",
@@ -301,6 +301,10 @@
         {
           "q": "Wie bestimme ich die Reihenfolge mehrerer Variablen?",
           "a": "Den Schalter **Ausgabereihenfolge** unter der Vorlage benutzen. **Verschränkt** entspricht bash (f1_tag, f1_bal, f2_tag…); **Gruppiert** lässt die rechte Variable komplett durchlaufen, also erst alle tag-Zeilen, dann alle bal-Zeilen. Beide Modi erzeugen dieselben Einträge, nur in anderer Reihenfolge."
+        },
+        {
+          "q": "Wird meine Vorlage auf einen Server hochgeladen?",
+          "a": "100% clientseitig: die Brace-Expansion der Vorlage läuft vollständig in Ihrem Browser — weder die Vorlage noch das Ergebnis werden hochgeladen, sodass sensible Inhalte sicher sind."
         }
       ],
       "features": [

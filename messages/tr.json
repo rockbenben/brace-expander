@@ -202,7 +202,7 @@
   "tools": {
     "subtitleTranslator": {
       "title": "Altyazı Çevirici",
-      "description": "Toplu SRT, ASS, VTT, SBV, LRC çevirisi. 120+ dil."
+      "description": "Toplu SRT, ASS, SSA, VTT, SBV, LRC çevirisi. 120+ dil."
     },
     "jsonTranslate": {
       "title": "i18n JSON Çevirici",
@@ -266,7 +266,7 @@
     },
     "dataParserFlare": {
       "title": "Flare Dönüştürücü",
-      "description": "Tarayıcı yer imleri ve Flare formatı dönüşümü"
+      "description": "Yer imi HTML'ini Flare YAML'ye dönüştür (düz)"
     },
     "dataParserImgPrompt": {
       "title": "IMGPrompt Veri Oluşturucu",
@@ -301,6 +301,10 @@
         {
           "q": "Birden çok değişkenin sırasını nasıl kontrol ederim?",
           "a": "Şablonun altındaki **Çıktı sırası** düğmesini kullanın. **İç içe** bash ile aynıdır (f1_tag, f1_bal, f2_tag…); **Gruplu** sağdaki değişkeni baştan sona bitirir, böylece önce tüm tag satırları, ardından tüm bal satırları gelir. İki mod da aynı öğeleri üretir, yalnızca sıra değişir."
+        },
+        {
+          "q": "Şablonum bir sunucuya yükleniyor mu?",
+          "a": "%100 istemci tarafında: süslü ayraç genişletme tamamen tarayıcınızda olur — şablon da sonuç da hiçbir sunucuya yüklenmez, hassas içerik güvende."
         }
       ],
       "features": [
